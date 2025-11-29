@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     currentY = nextY;
                     currentAngle += (Math.random() - 0.5) * 0.5; // Desviación
 
-                    // Crear ramas
+                    // ramas
                     if (Math.random() < this.branchChance) {
                         const branchAngle = currentAngle + (Math.random() * 1.2 - 0.6);
                         bolts.push(new Bolt(currentX, currentY, this.length / 2, branchAngle, this.branchChance / 2));
@@ -168,26 +168,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         
                 // --- OPTIMIZACIÓN ---
-                // Dibujamos el rayo una sola vez con un resplandor.
-                // El brillo inicial se simula con un shadowBlur más intenso al principio.
                 ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
                 ctx.lineWidth = 2;
                 ctx.shadowBlur = this.life > 25 ? 30 : 15; // Mayor resplandor al inicio
                 ctx.shadowColor = `rgba(122, 90, 248, ${alpha * 0.5})`;
                 ctx.stroke();
-                ctx.shadowBlur = 0; // Reseteamos la sombra para el siguiente frame
+                ctx.shadowBlur = 0;
             }
         }
 
         function createBolt() {
-            const startX = Math.random() * w;
-            // Hacemos que los rayos empiecen justo debajo del navbar
-            const startY = navbar.offsetHeight; 
-            const length = Math.random() * 40 + 30;
-            const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.2;
-            bolts.push(new Bolt(startX, startY, length, angle, 0.08));
+            // --- OPTIMIZACIÓN PARA MÓVILES ---
+            // Detectamos si la pantalla es pequeña (indicador de móvil)
+            const isMobile = window.innerWidth <= 768;
 
-            boltCreationTimeout = setTimeout(createBolt, Math.random() * 500 + 200);
+            // Reducimos la complejidad y frecuencia en móviles
+            const length = isMobile ? Math.random() * 20 + 20 : Math.random() * 40 + 30;
+            const branchChance = isMobile ? 0.03 : 0.08;
+            const creationDelay = isMobile ? Math.random() * 1200 + 800 : Math.random() * 500 + 200;
+
+            const startX = Math.random() * w;
+            const startY = navbar.offsetHeight; 
+            const angle = Math.PI / 2 + (Math.random() - 0.5) * 0.2;
+            bolts.push(new Bolt(startX, startY, length, angle, branchChance));
+
+            // Usamos el delay calculado
+            boltCreationTimeout = setTimeout(createBolt, creationDelay);
         }
 
         function animate() {
