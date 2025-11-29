@@ -1,0 +1,150 @@
+.projects {
+    position: relative;
+    padding: 10rem 2rem;
+    color: #CCD6F6;
+    background-image: url('../assets/proyectosfondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10, 25, 47, 0.65), rgba(10, 25, 47, 0.8));
+}
+
+.projects::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+    background: linear-gradient(to bottom, transparent, #111); /* De transparente al color del footer */
+    z-index: 2;
+}
+
+.projects h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+    color: #64FFDA;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 15px rgba(100, 255, 218, 0.6), 0 0 25px rgba(100, 255, 218, 0.6);
+}
+
+.hex-grid {
+    max-width: 900px;
+    margin: 50px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hex {
+    width: 250px;
+    height: 288px;
+    margin: -36px 8px 0;
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background-color: #172a45;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hex:nth-child(2n) {
+    margin-top: 0;
+}
+
+.hex::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(100, 255, 218, 0.1), rgba(100, 255, 218, 0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hex:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.hex:hover::before {
+    opacity: 1;
+}
+
+.hex img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hex:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+.hex-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0));
+    color: #CCD6F6;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hex:hover .hex-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hex-overlay h3 {
+    color: #E6F1FF;
+    text-shadow: 0 0 6px rgba(204, 214, 246, 0.5);
+}
+
+.hex-overlay a {
+    color: #64FFDA;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: text-shadow 0.3s ease;
+}
+
+.hex-overlay a:hover {
+    text-shadow: 0 0 8px rgba(100, 255, 218, 0.8);
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(100, 255, 218, 0.4);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.hex-grid .hex:nth-child(2) { transition-delay: 0.2s; }
+.hex-grid .hex:nth-child(3) { transition-delay: 0.4s; }

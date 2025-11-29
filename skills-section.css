@@ -1,0 +1,191 @@
+.skills {
+    position: relative;
+    padding: 10rem 2rem;
+    color: #f0f0f0;
+    background-image: url('../assets/skillsfondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.skills::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(17, 17, 17, 0.65), rgba(25, 17, 17, 0.8));
+}
+
+.skills::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+    background: linear-gradient(to bottom, transparent, rgba(10, 25, 47, 0.9)); /* De transparente al color de la sección 'projects' */
+    z-index: 2;
+}
+
+.skills h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    color: #FF4500;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 69, 0, 0.7), 0 0 25px rgba(255, 69, 0, 0.7);
+}
+
+.skills-spectrum-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    padding: 2rem 0;
+}
+
+.spectrum-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 69, 0, 0.2), rgba(255, 69, 0, 0.5), rgba(255, 69, 0, 0.2));
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+.spectrum-category {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    display: inline-block;
+    background-color: #111;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    border: 1px solid #444;
+    margin-bottom: 2rem;
+}
+
+.skills-nodes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.skill-node {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(circle, #333 0%, #1f1f1f 70%);
+    border: 1px solid #444;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.skill-node span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #f0f0f0;
+}
+
+.skill-node:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+}
+
+.skill-node::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    pointer-events: none;
+}
+
+.skill-node[data-level="excelente"] {
+    width: 110px;
+    height: 110px;
+    border-color: #FF4500;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 69, 0, 0.2);
+    animation: pulse-fire 2.5s infinite ease-in-out;
+}
+
+.skill-node[data-level="bien"] {
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, #2c2c2c 0%, #1f1f1f 70%);
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.2);
+}
+
+.skill-node[data-level="medio"] {
+    width: 75px;
+    height: 75px;
+    background: #1a1a1a;
+    opacity: 0.7;
+}
+
+.skill-node[data-level="excelente"]::after {
+    animation: pulse-ring 2.5s infinite ease-in-out;
+    animation-delay: 0.2s;
+}
+
+.skill-node[data-level="bien"]::after {
+    border-color: rgba(255, 99, 71, 0.2);
+}
+
+.skill-node::before {
+    content: "";
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 25px;
+    background: #444;
+}
+
+.skill-node[data-level="excelente"]::before {
+    background: #FF4500;
+    box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+}
+
+@keyframes pulse-fire {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(255, 69, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(255, 69, 0, 0.6), inset 0 0 15px rgba(255, 69, 0, 0.3);
+    }
+}
+
+@keyframes pulse-ring {
+    0%, 100% {
+        border-color: rgba(255, 99, 71, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        border-color: rgba(255, 99, 71, 0.8);
+        transform: scale(0.95);
+    }
+}
+
+@media (max-width: 768px) {
+    .spectrum-line { 
+        display: none;
+    }
+    .skill-node::before {
+        display: none;
+    }
+}
